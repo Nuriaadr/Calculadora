@@ -61,30 +61,68 @@ public class PanelPrincipal extends JPanel implements ActionListener {
         // Si es un botón
         if (o instanceof JButton) {
             String textoBoton = ((JButton) o).getText();
+            areaTexto.setText(((JButton) o).getText());
         }
 
         // RESTO DEL CÓDIGO DE LA LÓGICA DE LA CALCULADORA
     }
 
-    
-        switch (textoBoton) {
-            case "+":
-            case "-":
-            case "*":
-            case "/":
-                try {
-                    primerNumero = Double.parseDouble(areaTexto.getText());
-                    esperandoSegundoNumero = true;
-                    switch (textoBoton) {
-                        case "+": tipoOperacion = 0; 
-                        case "-": tipoOperacion = 1; 
-                        case "*": tipoOperacion = 2; 
-                        case "/": tipoOperacion = 3;
-                    }
-                    areaTexto.setText("");
-                } catch (NumberFormatException e) {
-                    areaTexto.setText("Error");
+    switch (textoBoton) {
+        case "+":
+        case "-":
+        case "*":
+        case "/":
+            try {
+                primerNumero = Double.parseDouble(areaTexto.getText());
+                esperandoSegundoNumero = true;
+                switch (textoBoton) {
+                    case "+":
+                        tipoOperacion = 0;
+                    case "-":
+                        tipoOperacion = 1;
+                    case "*":
+                        tipoOperacion = 2;
+                    case "/":
+                        tipoOperacion = 3;
                 }
-               
-                case "=":
-}
+                areaTexto.setText("");
+            } catch (NumberFormatException e) {
+                areaTexto.setText("Error");
+            }
+
+        case "=":
+            try {
+                double segundoNumero = Double.parseDouble(areaTexto.getText());
+                double resultado = 0;
+
+                switch (tipoOperacion) {
+                    case 0:
+                        resultado = primerNumero + segundoNumero;
+                       
+                    case 1:
+                        resultado = primerNumero - segundoNumero;
+                       
+                    case 2:
+                        resultado = primerNumero * segundoNumero;
+                       
+                    case 3:
+                        if (segundoNumero == 0) {
+                            areaTexto.setText("Error: división entre 0");
+                            return;
+                        }
+                        resultado = primerNumero / segundoNumero;
+                       
+                    default:
+                        areaTexto.setText("Operación no válida");
+                        return;
+                }
+
+                areaTexto.setText(String.valueOf(resultado));
+                esperandoSegundoNumero = false;
+
+            } catch (NumberFormatException ex) {
+                areaTexto.setText("Error");
+            }
+            break;
+
+    }
