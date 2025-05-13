@@ -22,11 +22,15 @@ public class PanelPrincipal extends JPanel implements ActionListener {
     private PanelBotones botonera;
     private JTextArea areaTexto;
     private int tipoOperacion;
+    private double primerNumero;
+    private boolean esperandoSegundoNumero;
 
     // Constructor
     public PanelPrincipal() {
         initComponents();
         tipoOperacion = -1; // No hay operaciones en la calculadora
+        primerNumero = 0;
+        esperandoSegundoNumero = false;
     }
 
     // Se inicializan los componentes gráficos y se colocan en el panel
@@ -56,11 +60,31 @@ public class PanelPrincipal extends JPanel implements ActionListener {
         Object o = e.getSource();
         // Si es un botón
         if (o instanceof JButton) {
-            System.out.println(((JButton) o).getText());
-            areaTexto.setText(((JButton) o).getText());
+            String textoBoton = ((JButton) o).getText();
         }
 
         // RESTO DEL CÓDIGO DE LA LÓGICA DE LA CALCULADORA
     }
 
+    
+        switch (textoBoton) {
+            case "+":
+            case "-":
+            case "*":
+            case "/":
+                try {
+                    primerNumero = Double.parseDouble(areaTexto.getText());
+                    esperandoSegundoNumero = true;
+                    switch (textoBoton) {
+                        case "+": tipoOperacion = 0; 
+                        case "-": tipoOperacion = 1; 
+                        case "*": tipoOperacion = 2; 
+                        case "/": tipoOperacion = 3;
+                    }
+                    areaTexto.setText("");
+                } catch (NumberFormatException e) {
+                    areaTexto.setText("Error");
+                }
+               
+                case "=":
 }
