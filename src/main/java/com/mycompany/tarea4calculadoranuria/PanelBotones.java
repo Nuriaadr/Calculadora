@@ -28,7 +28,7 @@ public class PanelBotones extends JPanel {
         for (int i = 0; i < 10; i++) {
             grupoBotones[i] = new JButton(Integer.toString(i));
         }
-        grupoBotones[10] = new JButton("+") 
+        grupoBotones[10] = new JButton("+");
         grupoBotones[11] = new JButton("-");
         grupoBotones[12] = new JButton("*");
         grupoBotones[13] = new JButton("/");
