@@ -46,5 +46,5 @@ public class PanelBotones extends JPanel {
     public JButton[] getgrupoBotones() {
         return grupoBotones;
     }
-
+ //hola esto es un commit
 }
