@@ -13,7 +13,7 @@ public class PanelBotonesTest {
         JButton[] botones = panel.getgrupoBotones();
 
         assertNotNull(botones, "El array de botones no debe ser null");
-        assertEquals(16, botones.length, "Debe haber 16 botones");
+        assertEquals(null, botones.length, "Debe haber 16 botones");
     }
 
     @Test
